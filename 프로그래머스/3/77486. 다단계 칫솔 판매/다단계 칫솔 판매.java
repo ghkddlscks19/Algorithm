@@ -1,34 +1,32 @@
 import java.util.*;
 class Solution {
     public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
-        //조직 관계도 저장
-        HashMap<String, String> inviteMap = new HashMap<>();        
+        //조직 관계도 설정
+        HashMap<String, String> referMap = new HashMap<>();
         
         for(int i =0; i<enroll.length; i++){
-            inviteMap.put(enroll[i], referral[i]);
+            referMap.put(enroll[i], referral[i]);
         }
         
-        //구성원과 받을 금액 저장
-        HashMap<String, Integer> payMap = new HashMap<>();
-        
+        //판매원 당 총 번 돈 저장
+        HashMap<String, Integer> totalMap = new HashMap<>();
         for(int i =0; i<seller.length; i++){
-            String curMember = seller[i];
-            int money = amount[i] * 100;
+            String currMember = seller[i];
+            int money = amount[i]*100;
             
-            while(money > 0 && !curMember.equals("-")){ 
-                //해당 인원이 받을 금액
-                payMap.put(curMember, payMap.getOrDefault(curMember, 0) + money - (money/10));
-                curMember = inviteMap.get(curMember);
-                //다음 사람이 받을 금액은 10으로 나눠줘야함.
-                money /= 10;
+            while(money>0 && !currMember.equals("-")){
+                totalMap.put(currMember, totalMap.getOrDefault(currMember, 0) + money-(money/10));
+                currMember = referMap.get(currMember);
+                money/=10;
             }
+            
         }
         
         int answer[] = new int[enroll.length];
-        
-        for(int i =0; i<enroll.length; i++){
-            answer[i] = payMap.getOrDefault(enroll[i],0);
+        for(int i =0; i<answer.length; i++){
+            answer[i] = totalMap.getOrDefault(enroll[i], 0);
         }
+        
         return answer;
     }
 }
