@@ -11,11 +11,6 @@ class Solution {
             mon.add(num);
         }
             
-        if(mon.size() >= takeCnt){
-            answer = takeCnt;
-        }else{
-            answer = mon.size();
-        }
-        return answer;
+        return answer = Math.min(takeCnt, mon.size());
     }
 }
