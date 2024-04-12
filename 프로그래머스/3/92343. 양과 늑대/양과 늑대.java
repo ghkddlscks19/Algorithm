@@ -46,6 +46,8 @@ class Solution {
                 //next는 방문 한거니까 제거
                 list.remove(Integer.valueOf(next));
                 
+                System.out.println(list.toString());
+                
                 //늑대일 때
                 if(info[next] == 1){
                     //양의 수는 늑대+1보다 클 때만 방문
