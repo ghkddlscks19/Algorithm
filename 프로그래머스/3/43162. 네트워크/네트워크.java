@@ -1,39 +1,32 @@
-import java.util.*;
 class Solution {
-    static int[] parent;
-    
-    static int find(int v){
-        if(parent[v] == v) return parent[v];
-        return parent[v] = find(parent[v]);
-    }
-    
-    static void union(int a, int b){
-        int fa = find(a);
-        int fb = find(b);
-        if(fa != fb) parent[fb] = fa;
-    }
+    static int[][] computer;
+    static boolean visited[];
+    static void dfs(int now){
+        visited[now] = true;
+        //연결되어 있는지 확인
+        for(int i =0; i<computer.length; i++){
+            if(computer[now][i] ==1 && !visited[i]){ 
+                dfs(i);
+            }
+        }
+     }
     public int solution(int n, int[][] computers) {
         int answer = 0;
-        parent = new int[n];
+        //배열 복사
+        computer = computers;
+        //방문 처리하는 배열
+        visited = new boolean[n];
         
+        //컴퓨터 개수만큼 반복
         for(int i =0; i<n; i++){
-            parent[i] = i;
-        }
-        
-        for(int i =0; i<n; i++){
-            for(int j =i+1; j<n; j++){
-                if(computers[i][j] == 1){
-                    union(i, j);
-                }
+            //방문안했으면 dfs 호출
+            if(!visited[i]){
+                dfs(i);
+                answer++;
             }
         }
         
-        HashSet<Integer> hs = new HashSet<>();
         
-        for(int x : parent){
-            hs.add(find(x));
-        }
-        
-        return answer = hs.size();
+        return answer;
     }
 }
