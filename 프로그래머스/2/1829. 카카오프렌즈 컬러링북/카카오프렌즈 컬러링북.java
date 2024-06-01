@@ -4,7 +4,7 @@ class Solution {
     static int dy[] = {0, 1, 0, -1};
     
     //영역의 갯수
-    static int numberOfArea;
+    static int numberOfArea ;
     //가장 큰 영역
     static int maxSizeOfOneArea;
     //영역의 크기를 셀 변수
