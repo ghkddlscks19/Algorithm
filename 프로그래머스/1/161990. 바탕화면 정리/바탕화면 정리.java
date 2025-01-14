@@ -9,14 +9,10 @@ class Solution {
         int maxX = 0;
         int maxY = 0;
             
-        char c[][] = new char[row][col];
-        // 2차원 배열로 변경
         for(int i =0; i<row; i++) {
-            for(int j =0; j<col; j++) {
-                c[i][j] = wallpaper[i].charAt(j);
-                
+            for(int j =0; j<col; j++) {             
                 // #일 때 최소, 최대 좌표 구하기
-                if(c[i][j] == '#') {
+                if(wallpaper[i].charAt(j) == '#') {
                     minX = Math.min(minX, i);
                     maxX = Math.max(maxX, i);
                     minY = Math.min(minY, j);
