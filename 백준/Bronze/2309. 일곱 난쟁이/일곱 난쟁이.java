@@ -22,7 +22,7 @@ public class Main{
     for(int i =0; i<arr.length-1; i++) {
       for(int j =i+1; j<arr.length; j++) {
         if(sum - arr[i] - arr[j] == 100) {
-          // 일곱 난쟁이가 100인 경우 0으로 초기화 해서 없애줌
+          // 일곱 난쟁이가 100인 경우 인덱스 확인해서 저장
           a = i;
           b = j;
           break;
