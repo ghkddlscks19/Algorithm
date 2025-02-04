@@ -7,8 +7,7 @@ def solution(keymap, targets):
             if keyChar not in key:
                 key[keyChar] = j+1
             else:
-                if(key[keyChar] > j+1):
-                    key[keyChar] = j+1
+                key[keyChar] = min(key[keyChar], j+1)
     
     for i in range (len(targets)):
         sum = 0
