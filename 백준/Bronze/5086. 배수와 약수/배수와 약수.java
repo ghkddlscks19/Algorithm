@@ -13,29 +13,13 @@ public class Main{
       int a = Integer.parseInt(st.nextToken());
       int b = Integer.parseInt(st.nextToken());
 
-      boolean isFactor = false;
-      boolean isMultiple = false;
-      if(a > b) { // 배수인지 확인
-        int i = 2;
-        while(a >= b * i) {
-          if(a == b * i) {
-            isMultiple = true;
-            bw.write("multiple" + "\n");
-          }
-          i++;
-        }       
-      } else { // 약수인지 확인
-        int i = 2;
-        while(b >= a * i) {
-          if(b == a * i) {
-            isFactor = true;
-            bw.write("factor" + "\n");
-          }
-          i++;
-        }    
+      if(a % b == 0) {
+        bw.write("multiple" + "\n");
+      } else if(b % a == 0) {
+        bw.write("factor" + "\n");
+      } else {
+        bw.write("neither" + "\n");
       }
-      if(!isMultiple && !isFactor) bw.write("neither" + "\n");
-      
     }
     bw.flush();
     bw.close();
