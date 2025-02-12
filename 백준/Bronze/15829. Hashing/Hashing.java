@@ -8,12 +8,17 @@ public class Main{
     int L = Integer.parseInt(br.readLine());
     String input = br.readLine();
 
-    int result = 0;
+    long result = 0;
+    int m = 1234567891;
+    long pow = 1;
     for(int i =0; i<input.length(); i++) {
-      result += ((int) (input.charAt(i) - 'a' + 1)* Math.pow(31, i)) % 1234567891;
+      char alphabet = input.charAt(i);
+      int num = (int) alphabet - 'a' + 1;
+      result += num * pow;
+      pow = 31 * pow % m;
     }
 
-    bw.write(result + "");
+    bw.write(result % m + "");
     bw.flush();
     bw.close();
   }
