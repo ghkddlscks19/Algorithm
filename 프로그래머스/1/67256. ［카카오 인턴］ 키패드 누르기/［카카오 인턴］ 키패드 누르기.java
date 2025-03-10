@@ -1,12 +1,13 @@
 class Solution {
     public String solution(int[] numbers, String hand) {
         // 147 왼손, 369 오른손, 가운데는 거리 계산해서 가까운거
+        // *은 10, 0은 11, #은 12로 정의
         int left = 10; // *
         int right = 12; // #
         
         StringBuilder sb = new StringBuilder();
         for(int num : numbers) {
-            if(num == 0) num = 11;
+            if(num == 0) num = 11; 
             if(num == 1 || num ==4 || num == 7) {
                 sb.append("L");
                 left = num;
