@@ -7,7 +7,6 @@ public class Main{
 
     int N = Integer.parseInt(br.readLine());
 
-    // 봉지 개수
     int result = 0;
 
     while(N > 0) {
@@ -18,11 +17,12 @@ public class Main{
         N -= 3;
         result++;
       }
-
-      if(N < 0) result = -1;
     }
 
-    bw.write(result + "");
+    // 정확히 만들 수 없는 경우
+    if(N < 0) bw.write("-1");
+    else bw.write(result + "");
+    
     bw.flush();
     bw.close();
   }
