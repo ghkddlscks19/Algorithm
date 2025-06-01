@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-
 public class Main{
   public static void main(String args[]) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -11,24 +10,25 @@ public class Main{
     int K = Integer.parseInt(st.nextToken());
     int N = Integer.parseInt(st.nextToken());
 
-    int arr[] = new int[K];
-    
+    int lines[] = new int[K]; 
     for(int i =0; i<K; i++) {
-      arr[i] = Integer.parseInt(br.readLine());
+      lines[i] = Integer.parseInt(br.readLine());
     }
 
-    Arrays.sort(arr);
+    Arrays.sort(lines);
 
-    long right = arr[K-1];
+    // long으로 타입 설정해줘야함
+    // left + right가 int 범위를 벗어날 수 있음
     long left = 1;
+    long right = lines[K-1];
+
     while(left <= right) {
-      long cnt = 0;
       long mid = (left + right) / 2;
+      int cnt = 0;
+      for(int i =0; i<K; i++) {
+        cnt += (lines[i] / mid);
+      }
 
-      // mid로 전체 돌면서 잘라보고 개수 몇개인지 확인
-      for(int i =0; i<K; i++) cnt += arr[i] / mid;
-
-      // N보다 개수가 작으면 더 작게 잘라야됨
       if(cnt < N) {
         right = mid - 1;
       } else {
@@ -36,7 +36,7 @@ public class Main{
       }
     }
 
-    bw.write(right + "");
+    bw.write(String.valueOf(right));
     bw.flush();
     bw.close();
   }
