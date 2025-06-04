@@ -1,56 +1,61 @@
 import java.util.*;
 import java.io.*;
-
 public class Main{
+  static int N, M;
+  static List<List<Integer>> graph = new ArrayList<>();
+  static int cnt = 0;
   static boolean visited[];
-  static List<List<Integer>> graph;
   public static void main(String args[]) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     StringTokenizer st = new StringTokenizer(br.readLine());
+    N = Integer.parseInt(st.nextToken()); // 정점의 개수
+    M = Integer.parseInt(st.nextToken()); // 간선의 개수
 
-    int N = Integer.parseInt(st.nextToken());
-    int M = Integer.parseInt(st.nextToken());
 
-    graph = new ArrayList<>();
-
-    for(int i =0; i<N+1; i++) {
+    // 그래프 초기화
+    for(int i = 0; i<=N; i++) {
       graph.add(new ArrayList<>());
     }
-
+    
     for(int i =0; i<M; i++) {
       st = new StringTokenizer(br.readLine());
       int u = Integer.parseInt(st.nextToken());
       int v = Integer.parseInt(st.nextToken());
 
+      // 무방향 그래프
       graph.get(u).add(v);
       graph.get(v).add(u);
     }
 
-
-    visited = new boolean[N+1];  
-    int count = 0;
-    
-    for(int i =1; i<N+1; i++) {
+    visited = new boolean[N+1];
+    for(int i =1; i<=N; i++) {
       if(!visited[i]) {
-        dfs(i);
-        count++;
+        bfs(i);
+        cnt++;        
       }
     }
 
-    bw.write(count + "");
+    bw.write(String.valueOf(cnt));
     bw.flush();
     bw.close();
   }
 
-  static void dfs(int node) {
-    visited[node] = true;
+  static void bfs(int v) {
+    ArrayDeque<Integer> q = new ArrayDeque<>();
+    q.add(v);
+    visited[v] = true;
+    
+    while(!q.isEmpty()) {
+      int curr = q.poll();
 
-    for(int next : graph.get(node)) {
-      if(!visited[next]) {
-        dfs(next);   
+      for(int g : graph.get(curr)) {
+        if(!visited[g]) {
+          visited[g] = true;
+          q.add(g);
+        }
       }
-    }
+    }   
   }
 }
