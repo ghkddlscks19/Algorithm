@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-
 public class Main{
   public static void main(String args[]) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -8,17 +7,17 @@ public class Main{
 
     int T = Integer.parseInt(br.readLine());
 
-    long dp[] = new long[101];
-    dp[1] = dp[2] = dp[3] = 1;
-    dp[4] = dp[5] = 2;
-    
-    for(int i =6; i<dp.length; i++) {
-      dp[i] = dp[i-1] + dp[i-5];
+    long arr[] = new long[101];
+    arr[1] = arr[2] = arr[3] = 1;
+
+    for(int i =4; i<=100; i++) {
+      arr[i] = arr[i-3] + arr[i-2];
     }
 
-    for(int i =0; i<T; i++) {
+    for(int t =0; t<T; t++) {
       int N = Integer.parseInt(br.readLine());
-      bw.write(dp[N] + "\n");
+      bw.write(String.valueOf(arr[N]));
+      bw.newLine();
     }
 
     bw.flush();
