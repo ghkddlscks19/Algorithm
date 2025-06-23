@@ -1,45 +1,34 @@
 import java.util.*;
 import java.io.*;
 public class Main{
-  static int N;
-  static int t[], p[];
   public static void main(String args[]) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    N = Integer.parseInt(br.readLine());
+    int N = Integer.parseInt(br.readLine());
 
-    t = new int[N];
-    p = new int[N];
-
-    for(int i =0; i<N; i++) {
+    int T[] = new int[N+1];
+    int P[] = new int[N+1];
+    
+    for(int i =1; i<=N; i++) {
       StringTokenizer st = new StringTokenizer(br.readLine());
-      t[i] = Integer.parseInt(st.nextToken());
-      p[i] = Integer.parseInt(st.nextToken());
+      T[i] = Integer.parseInt(st.nextToken());
+      P[i] = Integer.parseInt(st.nextToken());
     }
 
-    int result = dfs(0, 0);
+    int dp[] = new int[N+2];
+    dp[N+1] = 0;
 
-    bw.write(result + "");
+    for(int i =N; i>=1; i--) {
+      if(i + T[i] > N + 1) { // 상담 일이 퇴사 일을 넘어 가는 경우
+        dp[i] = dp[i+1];
+      } else { // 상담을 받는 경우, 안 받는 경우
+        dp[i] = Math.max(P[i] + dp[i + T[i]], dp[i+1]);
+      }
+    }
+
+    bw.write(String.valueOf(dp[1]));
     bw.flush();
     bw.close();
-  }
-
-  static int dfs(int index, int sum) {
-    // 인덱스가 넘어가면 현재까지의 수익 반환
-    if(index >= N) return sum;
-
-    int max = 0;
-
-    if(index + t[index] <= N) {
-      // 현재 상담 선택
-      max = Math.max(max, dfs(index + t[index], sum + p[index]));
-    }
-
-    // 현재 상담을 선택하지 않은 경우
-    max = Math.max(max, dfs(index + 1, sum));
-
-    return max;
-    
   }
 }
