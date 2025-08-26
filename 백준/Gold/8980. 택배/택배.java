@@ -23,10 +23,13 @@ public class Main{
     }
 
     // 도착점 순서로 나열
-    Arrays.sort(list, (a, b) -> a.end - b.end);
+    Arrays.sort(list, (a, b) -> {
+        if(a.end != b.end) return a.end - b.end;
+        return a.start - b.start;  
+    });
 
     // 각 구간 별 적재량
-    int truck[] = new int[M+1];
+    int truck[] = new int[N+1];
     int result = 0;
     
     for(Delivery d: list) {
