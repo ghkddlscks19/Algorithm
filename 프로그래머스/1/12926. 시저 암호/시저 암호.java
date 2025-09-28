@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Solution {
     public static String solution(String s, int n) {
         String answer = "";
