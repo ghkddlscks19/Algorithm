@@ -1,30 +1,30 @@
 import java.util.*;
 class Solution {
-    //모음 사전을 저장할 리스트
-    static ArrayList<String> dict;
-    //모음 넣어놓을 배열
-    static String vowels[];
+    static List<String> dict = new ArrayList<>(); // 사전 리스트
+    static String[] moeum = {"A","E","I","O","U"}; // 모음 배열
     
-    static void dfs(String vowels[], String curr, int depth){
-        dict.add(curr);
-        if(depth == 5){
-            return;
-        }
-        for(int i =0; i<5; i++){
-            dfs(vowels, curr+vowels[i], depth+1);
-        }
-    }
     public int solution(String word) {
-        vowels = new String[]{"A","E","I","O","U"};
-        dict = new ArrayList<>();
+        dfs("", 0);
+        
         int answer = 0;
-        dfs(vowels, "", 0); 
-        for(int i =0; i<dict.size(); i++){
-            if(dict.get(i).equals(word)){
+        
+        for(int i =0; i<dict.size(); i++) {
+            if(dict.get(i).equals(word)) {
                 answer = i;
-                break;
             }
         }
+        
+        
         return answer;
+    }
+    
+    static void dfs(String curr, int depth) {
+        dict.add(curr); // 사전에 먼저 넣기
+        
+        if(depth == 5) return;
+        
+        for(int i =0; i<5; i++) {
+            dfs(curr + moeum[i], depth+1);
+        }
     }
 }
