@@ -1,29 +1,33 @@
 import java.util.*;
 class Solution {
     public int[] solution(int[] answers) {
-        ArrayList<Integer> answer = new ArrayList<>();
-        int[] st1 = {1,2,3,4,5};
-        int[] st2 = {2,1,2,3,2,4,2,5};
-        int[] st3 = {3,3,1,1,2,2,4,4,5,5};
-            
-        int st1Cnt = 0;
-        int st2Cnt = 0;
-        int st3Cnt = 0;
+        int[] student1 = {1, 2, 3, 4, 5};
+        int[] student2 = {2, 1, 2, 3, 2, 4, 2, 5};
+        int[] student3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
         
-        //답 개수 반복문
-        for(int i =0; i<answers.length; i++){
-            //1,2,3번의 학생의 풀이와 답이 같은지 판별
-            if(answers[i] == st1[i%st1.length]) st1Cnt++;
-            if(answers[i] == st2[i%st2.length]) st2Cnt++;
-            if(answers[i] == st3[i%st3.length]) st3Cnt++;
+        int cnt1 = 0, cnt2 = 0, cnt3 = 0;
+        
+        for(int i =0; i<answers.length; i++) {
+            if(student1[i % student1.length] == answers[i]) {
+                cnt1++;
+            }
+            
+            if(student2[i % student2.length] == answers[i]) {
+                cnt2++;
+            }
+            
+            if(student3[i % student3.length] == answers[i]) {
+                cnt3++;
+            }
         }
         
-        if(st1Cnt>=st2Cnt && st1Cnt>=st3Cnt) answer.add(1);
-        if(st2Cnt>=st1Cnt && st2Cnt>=st3Cnt) answer.add(2);
-        if(st3Cnt>=st1Cnt && st3Cnt>=st2Cnt) answer.add(3);
+        List<Integer> answer = new ArrayList<>(); // 정답 넣을 리스트
+        int max = Math.max(cnt1, Math.max(cnt2, cnt3)); // 최댓값 찾기
         
+        if(cnt1 == max) answer.add(1);
+        if(cnt2 == max) answer.add(2);
+        if(cnt3 == max) answer.add(3);
         
-
         return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 }
