@@ -1,25 +1,27 @@
 import java.util.*;
 class Solution {
     public String[] solution(String[] strings, int n) {
-        String[] answer = new String[strings.length];
-        //우선순위 큐로 정렬
-        PriorityQueue<String> pq = new PriorityQueue<>((o1, o2) -> {
-            //n번째 문자가 같은경우
-            if(o1.charAt(n) == o2.charAt(n)){
-                return o1.compareTo(o2);
+        // 우선순위 큐 이용해서 큰거부터 빼내면 될듯
+        PriorityQueue<String> pq = new PriorityQueue<>((s1, s2) -> {
+            // n번째 문자가 같으면 오름차순으로
+            if(s1.charAt(n) == s2.charAt(n)) {
+                return s1.compareTo(s2);
             }
-            return o1.charAt(n) - o2.charAt(n);
+            
+            // n번째 글자 기준으로 오름차순 정렬
+            return s1.charAt(n) - s2.charAt(n);
         });
         
-        //우선순위 큐에 전부 넣기
-        for(String str : strings){
-            pq.add(str); 
+        for(String s: strings) {
+            pq.offer(s);
         }
         
-        int i = 0;
-        //poll하면 정렬 순서대로 나옴
-        while(!pq.isEmpty()){
-            answer[i++] = pq.poll();
+        String[] answer = new String[strings.length];
+        
+        int idx = 0;
+        
+        while(!pq.isEmpty()) {
+            answer[idx++] = pq.poll();
         }
         
         return answer;
