@@ -1,17 +1,16 @@
-import java.util.Stack;
+import java.util.*;
 class Solution {
     boolean solution(String s) {
-        //스택 생성
-        Stack<Character> stack = new Stack<>();
+        ArrayDeque<Character> stack = new ArrayDeque<>();
         
-        for(char c : s.toCharArray()){
+        for(char c: s.toCharArray()) {
             if(c == '(') stack.push(c);
-            else{
+            else {
                 if(stack.isEmpty()) return false;
                 stack.pop();
             }
         }
-        
+
         return stack.isEmpty();
     }
 }
