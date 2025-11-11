@@ -3,36 +3,43 @@ class Solution {
     public int[] solution(String[] operations) {
         TreeMap<Integer, Integer> tm = new TreeMap<>();
         
-        for(String operation: operations) {
-            String[] split = operation.split(" ");
-            String op = split[0];
-            int num = Integer.parseInt(split[1]);
+        // 연산들 순회
+        for(String op: operations) {
+            String[] input = op.split(" ");
+            String alpha = input[0];
+            int num = Integer.parseInt(input[1]);
             
-            // 삽입
-            if(op.equals("I")) {
+            
+            if(alpha.equals("I")) {
+                // 삽입 연산
                 tm.put(num, tm.getOrDefault(num, 0) + 1);
-            } else {
-                // 비어있으면 삭제 연산 무시
-                if(tm.isEmpty()) continue;
-                
-                // 최솟값, 최댓값 삭제
-                if(num == -1) {
-                    int minKey = tm.firstKey();
-                    if(tm.get(minKey) == 1) tm.remove(minKey);
-                    else tm.put(minKey, tm.get(minKey) - 1);
-                } else { 
-                    int maxKey = tm.lastKey();
-                    if(tm.get(maxKey) == 1) tm.remove(maxKey);
-                    else tm.put(maxKey, tm.get(maxKey) - 1);
-                }
             }
-            
+            else {
+                if(!tm.isEmpty()) {
+                    int target = 0;
+                    if(num == 1) {
+                        // 최댓값
+                        target = tm.lastKey();
+                    } else {
+                        // 최솟값
+                        target = tm.firstKey();
+                    }
+                    
+                    if(tm.get(target) == 1) {
+                        // 남은 숫자가 하나면 제거
+                        tm.remove(target);
+                    } else {
+                        // 남은 숫자가 여러개면 한개만 제거
+                        tm.put(num, tm.get(target) - 1);
+                    }
+                }                             
+            }
         }
         
         if(tm.isEmpty()) {
             return new int[]{0, 0};
+        } else {
+            return new int[]{tm.lastKey(), tm.firstKey()};
         }
-        
-        return new int[]{tm.lastKey(), tm.firstKey()};
     }
 }
