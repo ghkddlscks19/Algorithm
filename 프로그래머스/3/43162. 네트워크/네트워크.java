@@ -1,32 +1,26 @@
 class Solution {
-    static int[][] computer;
-    static boolean visited[];
-    static void dfs(int now){
-        visited[now] = true;
-        //연결되어 있는지 확인
-        for(int i =0; i<computer.length; i++){
-            if(computer[now][i] ==1 && !visited[i]){ 
-                dfs(i);
-            }
-        }
-     }
+    int answer = 0;
+    boolean visited[];
     public int solution(int n, int[][] computers) {
-        int answer = 0;
-        //배열 복사
-        computer = computers;
-        //방문 처리하는 배열
         visited = new boolean[n];
         
-        //컴퓨터 개수만큼 반복
-        for(int i =0; i<n; i++){
-            //방문안했으면 dfs 호출
-            if(!visited[i]){
-                dfs(i);
+        // 모든 컴퓨터를 순회하며 네트워크 찾기
+        for(int i =0; i<n; i++) {
+            if(!visited[i]) {
+                dfs(i, computers);
                 answer++;
             }
         }
-        
-        
         return answer;
+    }
+    
+    void dfs(int now, int[][] computers) {
+        visited[now] = true;
+        for(int i =0; i<computers.length; i++) {
+            if(!visited[i] && computers[now][i] == 1) {
+                // 방문하지 않았고 연결되어 있다면 방문
+                dfs(i, computers);
+            }
+        }
     }
 }
