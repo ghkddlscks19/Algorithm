@@ -1,14 +1,15 @@
 import java.util.*;
 class Solution {
     //해당 지점까지의 거리를 저장할 배열
-    static int dist[][];
-    static int answer = 0;
-    static int n, m;
-    //상,하,좌,우로 이동할때 사용할 배열
-    static int dx[] = {-1,0,1,0};
-    static int dy[] = {0,1,0,-1};
+    int dist[][];
+    int answer = 0;
+    int n, m;
     
-    static class Point{
+    //상,하,좌,우로 이동할때 사용할 배열
+    int dx[] = {-1,0,1,0};
+    int dy[] = {0,1,0,-1};
+    
+    class Point{
         int x;
         int y;
         public Point(int x, int y){
@@ -17,8 +18,8 @@ class Solution {
         }
     }
     
-    static void bfs(int x, int y, int maps[][]){
-        ArrayDeque<Point> queue = new ArrayDeque<>();
+    void bfs(int x, int y, int maps[][]){
+        Deque<Point> queue = new ArrayDeque<>();
         queue.add(new Point(x,y));
         dist[x][y] = 1;
         
