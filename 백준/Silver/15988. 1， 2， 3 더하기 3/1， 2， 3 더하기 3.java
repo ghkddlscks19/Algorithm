@@ -8,24 +8,18 @@ public class Main{
 
     int T = Integer.parseInt(br.readLine());
 
-    for(int tc =0; tc<T; tc++) {
+    long[] dp = new long[1000001];
+    
+    dp[1] = 1L;
+    dp[2] = 2L;
+    dp[3] = 4L;
+    for(int i =4; i<dp.length; i++) {
+      dp[i] = (dp[i-3] + dp[i-2] + dp[i-1]) % MOD;
+    }
+    
+    for(int i =0; i<T; i++) {
       int n = Integer.parseInt(br.readLine());
-      long dp[] = new long[n+1];
-      if(n == 1) {
-        bw.write(String.valueOf(1));
-      } else if(n == 2) {
-        bw.write(String.valueOf(2));
-      } else if(n == 3) {
-        bw.write(String.valueOf(4));
-      } else {
-        dp[1] = 1L;
-        dp[2] = 2L;
-        dp[3] = 4L;
-        for(int i =4; i<=n; i++) {
-          dp[i] = (dp[i-3] + dp[i-2] + dp[i-1]) % MOD;     
-        }
-        bw.write(String.valueOf(dp[n]));
-      }
+      bw.write(dp[n] + "");
       bw.newLine();
     }
 
