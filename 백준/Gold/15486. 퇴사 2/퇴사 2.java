@@ -7,8 +7,8 @@ public class Main{
 
     int N = Integer.parseInt(br.readLine());
 
-    int T[] = new int[N+1];
-    int P[] = new int[N+1];
+    int[] T = new int[N+1];
+    int[] P = new int[N+1];
 
     for(int i =1; i<=N; i++) {
       StringTokenizer st = new StringTokenizer(br.readLine());
@@ -16,7 +16,7 @@ public class Main{
       P[i] = Integer.parseInt(st.nextToken());
     }
 
-    int dp[] = new int[N+2]; // 끝에서 부터!
+    int[] dp = new int[N+2];
 
     for(int i =N; i>=1; i--) {
       if(i + T[i] > N + 1) { // 상담 일이 퇴사 일 넘어 가는 경우
