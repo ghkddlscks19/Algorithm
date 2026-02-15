@@ -1,42 +1,49 @@
 import java.util.*;
 import java.io.*;
-
 public class Main{
   public static void main(String args[]) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     int N = Integer.parseInt(br.readLine());
-
-    int arr[] = new int[N];
-    HashMap<Integer, Integer> hm = new HashMap<>();
-    double sum = 0;
+    int[] num = new int[N];
+    long sum = 0;
+    // 빈도 체크를 위한 배열 -4000 ~ 4000
+    int[] count = new int[8001];
+    int maxCount = 0;
     
     for(int i =0; i<N; i++) {
-      arr[i] = Integer.parseInt(br.readLine()); 
-      sum += arr[i];
-      hm.put(arr[i], hm.getOrDefault(arr[i], 0) + 1);
+      num[i] = Integer.parseInt(br.readLine());
+      sum += num[i];
+      count[num[i] + 4000]++;
+      maxCount = Math.max(maxCount, count[num[i] + 4000]);
     }
 
-    Arrays.sort(arr);
+    // 계산을 위해 정렬
+    Arrays.sort(num);
 
-    ArrayList<Integer> list = new ArrayList<>();
-    int maxFrequency = 0;
-    for(int freq : hm.values()) {
-      maxFrequency = Math.max(maxFrequency, freq);     
+    // 산술 평균
+    int avg = (int) Math.round((double) sum / N);
+
+    // 중앙값
+    int med = num[N/2];
+
+    // 최빈값
+    int modeCount = 0;
+    int mode = 0;
+    for(int i =0; i<count.length; i++) {
+      if(count[i] == maxCount) {
+        mode = i - 4000;
+        modeCount++;
+
+        if(modeCount == 2) break;
+      }
     }
 
-    for(int n : hm.keySet()) {
-      if(hm.get(n) == maxFrequency) list.add(n);
-    }
-    Collections.sort(list);
+    // 범위
+    int range = num[N-1] - num[0];
 
-    
-    bw.write((int) Math.round(sum/N) + "\n"); // 산술평균
-    bw.write(arr[N/2] + "\n"); // 중앙값
-    bw.write((list.size() > 1 ? list.get(1) : list.get(0)) + "\n"); // 최빈값
-    bw.write((arr[N-1] - arr[0]) + "\n"); // 범위
-
+    bw.write(avg + "\n" + med + "\n" + mode + "\n" + range);
     bw.flush();
     bw.close();
   }
