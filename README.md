@@ -4,11 +4,11 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 <!---LeetCode Topics Start-->
 # LeetCode Topics
 ## Two Pointers
-|  |
-| ------- |
+| Problem Name | Difficulty |
+| ------- | ------- |
 | [1768-merge-strings-alternately](https://github.com/ghkddlscks19/Algorithm/tree/master/1768-merge-strings-alternately) |
 ## String
-|  |
-| ------- |
+| Problem Name | Difficulty |
+| ------- | ------- |
 | [1768-merge-strings-alternately](https://github.com/ghkddlscks19/Algorithm/tree/master/1768-merge-strings-alternately) |
 <!---LeetCode Topics End-->
