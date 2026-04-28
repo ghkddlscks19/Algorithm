@@ -16,4 +16,8 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [1071-greatest-common-divisor-of-strings](https://github.com/ghkddlscks19/Algorithm/tree/main/LeetCode/Easy/1071-greatest-common-divisor-of-strings/) | Easy |
+## Array
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [1431-kids-with-the-greatest-number-of-candies](https://github.com/ghkddlscks19/Algorithm/tree/main/LeetCode/Easy/1431-kids-with-the-greatest-number-of-candies/) | Easy |
 <!---LeetCode Topics End-->
